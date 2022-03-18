@@ -7,7 +7,6 @@ const LoggedIn = () => {
     let navigate = useNavigate();
 
     const handleSignOut = () => {
-        console.log(auth.user.multiFactor.user.uid)
         auth.signOut();
         navigate('/');
     }

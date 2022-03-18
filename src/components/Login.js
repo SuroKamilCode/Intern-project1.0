@@ -26,7 +26,7 @@ const Login = () => {
         auth.signInWithEmailAndPassword(
             emailValue, passValue
         ).then(auth => {
-            // console.log(auth.user.multiFactor.user.uid)
+            console.log(auth.user.multiFactor.user.uid)
             navigate('/profile');
         }).catch(error => {
             alert('Błędne logowanie!');
