@@ -7,7 +7,7 @@ import './styles/styles.scss';
 function App() {
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/profile' element={<LoggedIn />} />
