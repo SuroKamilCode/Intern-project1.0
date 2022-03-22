@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import { signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
 
@@ -7,8 +8,12 @@ const LoggedIn = () => {
     let navigate = useNavigate();
 
     const handleSignOut = () => {
-        auth.signOut();
-        navigate('/');
+        signOut(auth).then(() => {
+            navigate('/');
+        }).catch((error) => {
+            console.log(error);
+        });
+
     }
 
     return (
