@@ -7,12 +7,12 @@ import './styles/styles.scss';
 function App() {
 
   return (
-    <Router basename="/Intern-project1.0">
-      <Routes>
+    <Router basename={process.env.REACT_APP_BASENAME_URL} >
+      < Routes >
         <Route path='/' element={<Login />} />
         <Route path='/profile' element={<LoggedIn />} />
         <Route path='*' element={<ErrorPage />} />
-      </Routes>
+      </ Routes>
     </Router>
   );
 }
