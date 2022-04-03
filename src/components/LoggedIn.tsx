@@ -1,22 +1,22 @@
 import { Button } from '@mui/material';
 import { signOut } from "firebase/auth";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import allActions from '../actions/index';
 import { auth } from '../firebase';
+import { useAppSelector } from '../hooks';
 
 
-const LoggedIn = () => {
+const LoggedIn: React.FC = () => {
 
     let navigate = useNavigate();
     const dispatch = useDispatch();
-    const users = useSelector(state => state.currentUser);
+    const users = useAppSelector(state => state.currentUser);
 
 
-    const handleSignOut = () => {
+    const handleSignOut: () => void = () => {
         signOut(auth).then(() => {
             dispatch(allActions.logOut());
-            // localStorage.removeItem('authUser')
             navigate('/');
         }).catch((error) => {
             console.log(error);

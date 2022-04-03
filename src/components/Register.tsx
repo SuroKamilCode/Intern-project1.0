@@ -1,34 +1,35 @@
 import { Button, TextField } from '@mui/material';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import allActions from '../actions';
 import loader from '../assets/gifs/loading.gif';
 import { auth } from '../firebase';
+import { useAppSelector } from '../hooks';
 
-const Register = () => {
+const Register: React.FC = () => {
 
-    const [email, setEmailValue] = useState('');
-    const [password, setPassValue] = useState('');
-    const [confirmPass, setConfirmPass] = useState('');
-    const [logInError, setError] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [errMessage, setErrMessage] = useState(null);
-    const [emailErrorHandler, setEmailErrorHandler] = useState(false);
-    const [passErrorHandler, setPassErrorHandler] = useState(false);
-    const [emailFormat, setEmailFormat] = useState(false);
-    const [passFormat, setPassFormat] = useState(false);
+    const [email, setEmailValue] = useState<string>('');
+    const [password, setPassValue] = useState<string>('');
+    const [confirmPass, setConfirmPass] = useState<string>('');
+    const [logInError, setError] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [errMessage, setErrMessage] = useState<string | null>(null);
+    const [emailErrorHandler, setEmailErrorHandler] = useState<boolean>(false);
+    const [passErrorHandler, setPassErrorHandler] = useState<boolean>(false);
+    const [emailFormat, setEmailFormat] = useState<boolean>(false);
+    const [passFormat, setPassFormat] = useState<boolean>(false);
 
     let navigate = useNavigate();
     const dispatch = useDispatch();
-    const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const passwordFormat = /^(?=.*\d).{8,20}$/;
+    const mailformat: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const passwordFormat: RegExp = /^(?=.*\d).{8,20}$/;
 
-    const errors = useSelector(state => state.errorReducer);
+    const errors = useAppSelector(state => state.errorReducer);
 
-    const handleEmail = (e) => {
-        let value = e.target.value;
+    const handleEmail: (e: React.ChangeEvent<any>) => void = (e: React.ChangeEvent<any>) => {
+        let value: string = e.target.value;
         if (e.target.value === '') {
             setEmailErrorHandler(false);
             setEmailFormat(false)
@@ -42,8 +43,8 @@ const Register = () => {
         }
     }
 
-    const handlePass = (e) => {
-        let value = e.target.value;
+    const handlePass: (e: React.ChangeEvent<any>) => void = (e: React.ChangeEvent<any>) => {
+        let value: string = e.target.value;
         if (e.target.value === '') {
             setPassErrorHandler(false);
             setPassFormat(false);
@@ -57,13 +58,13 @@ const Register = () => {
         }
     }
 
-    const handleConfirmPass = (e) => {
-        let value = e.target.value;
+    const handleConfirmPass: (e: React.ChangeEvent<any>) => void = (e: React.ChangeEvent<any>) => {
+        let value: string = e.target.value;
         setConfirmPass(value);
     }
 
 
-    const handleRegister = e => {
+    const handleRegister: (e: React.ChangeEvent<any>) => void = (e: React.ChangeEvent<any>) => {
         if (password === confirmPass) {
             e.preventDefault();
             setLoading(true);
@@ -101,7 +102,7 @@ const Register = () => {
             {loading ? <img src={loader} alt="ładowanie" /> :
                 <div>
                     <h1 className='title'>Zarejestruj się!</h1>
-                    <TextField onChange={handleEmail} sx={{ margin: .8 }} className='input' type='email' id="outlined-basic" label="E-mail" spacing="" variant="outlined" autoFocus required error={emailErrorHandler} />
+                    <TextField onChange={handleEmail} sx={{ margin: .8 }} className='input' type='email' id="outlined-basic" label="E-mail" variant="outlined" autoFocus required error={emailErrorHandler} />
                     {emailFormat ? <p className="err-msg">Nieprawidłowy format Email!</p> : null}
                     <TextField onChange={handlePass} sx={{ margin: .8 }} className='input' type='password' id="outlined-basic" label="Hasło" variant="outlined" required error={passErrorHandler} />
                     <TextField onChange={handleConfirmPass} sx={{ margin: .8 }} className='input' type='password' id="outlined-basic" label="Powtórz hasło" variant="outlined" required error={passErrorHandler} />
@@ -114,5 +115,3 @@ const Register = () => {
 }
 
 export default Register;
-
-// (?=.*[a-z])

@@ -1,4 +1,5 @@
-export const setUser = (userObj) => {
+
+export const setUser = (userObj: {}) => {
     return {
         type: "SET_USER",
         payload: userObj
@@ -11,5 +12,5 @@ export const logOut = () => {
     }
 }
 
-// export { setUser, logOut }
+
 

@@ -1,4 +1,11 @@
-const currentUser = (state = {}, action) => {
+import { PayloadAction } from '@reduxjs/toolkit';
+
+interface ActionProps {
+    payload: any,
+    type: string
+}
+
+const currentUser = (state = {}, action: PayloadAction<ActionProps>) => {
     switch (action.type) {
         case "SET_USER":
             return {
