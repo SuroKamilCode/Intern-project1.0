@@ -1,11 +1,8 @@
-import { PayloadAction } from '@reduxjs/toolkit';
+import { Action } from './actionTypes';
 
-interface ActionProps {
-    payload: any,
-    type: string
-}
+const initialState = {};
 
-const errorReducer = (state = {}, action: PayloadAction<ActionProps>) => {
+const errorReducer = (state: {} = initialState, action: Action) => {
     switch (action.type) {
         case "LOG_IN_ERROR":
             return action.payload;

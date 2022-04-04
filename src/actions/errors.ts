@@ -1,7 +1,8 @@
-const logInError = (userObj: {}) => {
+
+const logInError = (errObj: {}) => {
     return {
         type: "LOG_IN_ERROR",
-        payload: userObj
+        payload: errObj
     }
 }
 

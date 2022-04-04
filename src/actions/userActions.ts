@@ -1,8 +1,8 @@
 
-export const setUser = (userObj: {}) => {
+export const setUser = (user: string) => {
     return {
         type: "SET_USER",
-        payload: userObj
+        payload: user
     }
 }
 
